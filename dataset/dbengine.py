@@ -1,3 +1,4 @@
+import logging
 import sqlalchemy as sql
 import time
 from string import Template
@@ -9,63 +10,12 @@ index_template = Template('CREATE INDEX $idx_title ON $table ($attr)')
 drop_table_template = Template('DROP TABLE IF EXISTS $tab_name')
 create_table_template = Template('CREATE TABLE $tab_name AS ($stmt)')
 
-def execute_query(args, conn_args, verbose):
-    query_id = args[0]
-    query = args[1]
-    if verbose:
-        print("Starting to execute query %s with id %s"%(query, query_id))
-    tic = time.clock()
-    con = psycopg2.connect(conn_args)
-    cur = con.cursor()
-    try:
-        cur.execute(query)
-    except Exception as e:
-        print(query)
-        raise Exception("ERROR executing query: %s" %e)
-    res = cur.fetchall()
-    con.close()
-    toc = time.clock()
-    if verbose:
-        print('Time to execute query with id %d: %.2f secs' % (query_id, (toc - tic)))
-    return res
-
-def execute_query_w_backup(args, conn_args, verbose, timeout):
-    query_id = args[0]
-    query = args[1][0]
-    query_backup = args[1][1]
-    if verbose:
-        print("Starting to execute query %s with id %s"%(query, query_id))
-    tic = time.clock()
-    con = psycopg2.connect(conn_args)
-    cur = con.cursor()
-    cur.execute("SET statement_timeout to %d;"%timeout)
-    try:
-        cur.execute(query)
-        res = cur.fetchall()
-    except psycopg2.extensions.QueryCanceledError as e:
-        if verbose:
-             print("Failed to execute query %s with id %s. Timeout reached." % (query, query_id))
-             print("Starting to execute backup query %s with id %s" % (query_backup, query_id))
-        con.close()
-        con = psycopg2.connect(conn_args)
-        cur = con.cursor()
-        cur.execute(query_backup)
-        res = cur.fetchall()
-        if len(res) == 1:
-            print(res)
-        con.close()
-    toc = time.clock()
-    if verbose:
-        print('Time to execute query with id %d: %.2f secs' % (query_id, (toc - tic)))
-    return res
-
 class DBengine:
-    def __init__(self, user, pwd, db, host='localhost', port=5432, pool_size=20, verbose=False, timeout=60000):
+    def __init__(self, user, pwd, db, host='localhost', port=5432, pool_size=20, timeout=60000):
         self.POOL_MAX = pool_size
         self.timeout = timeout
         self.pool = Pool(self.POOL_MAX)
-        self.verbose = verbose
-        url = 'postgresql+psycopg2://{}:{}@{}:{}/{}'
+        url = 'postgresql+psycopg2://{}:{}@{}:{}/{}?client_encoding=utf8'
         url = url.format(user, pwd, host, port, db)
         self.conn = url
         con = 'dbname={} user={} password={} host={} port={}'
@@ -75,28 +25,24 @@ class DBengine:
 
     # Executes queries in parallel.
     def execute_queries(self, queries):
-        if self.verbose:
-            print('Preparing to execute %d queries.'%len(queries))
+        logging.debug('Preparing to execute %d queries.', len(queries))
         tic = time.clock()
         # TODO(python3): Modify pool to context manager (with statement)
-        results = self.pool.map(partial(execute_query, conn_args=self.conn_args, verbose=self.verbose), [(idx, q) for idx, q in enumerate(queries)])
+        results = self.pool.map(partial(_execute_query, conn_args=self.conn_args), [(idx, q) for idx, q in enumerate(queries)])
         toc = time.clock()
-        if self.verbose:
-            print('Time to execute %d queries: %.2f secs'%(len(queries),toc-tic))
+        logging.debug('Time to execute %d queries: %.2f secs', len(queries), toc-tic)
         return results
 
     # Executes queries that have backups in parallel. Used in featurization.
     def execute_queries_w_backup(self, queries):
-        if self.verbose:
-            print('Preparing to execute %d queries.'%len(queries))
+        logging.debug('Preparing to execute %d queries.', len(queries))
         tic = time.clock()
         # TODO(python3): Modify pool to context manager (with statement)
         results = self.pool.map(
-            partial(execute_query_w_backup, conn_args=self.conn_args, verbose=self.verbose, timeout=self.timeout),
+            partial(_execute_query_w_backup, conn_args=self.conn_args, timeout=self.timeout),
             [(idx, q) for idx, q in enumerate(queries)])
         toc = time.clock()
-        if self.verbose:
-            print('Time to execute %d queries: %.2f secs'%(len(queries),toc-tic))
+        logging.debug('Time to execute %d queries: %.2f secs', len(queries), toc-tic)
         return results
 
     # Executes a single query using current connection.
@@ -106,9 +52,7 @@ class DBengine:
         result = conn.execute(query).fetchall()
         conn.close()
         toc = time.clock()
-        if self.verbose:
-            exec_time = toc-tic
-            print('Time to execute query: %.2f secs' % exec_time)
+        logging.debug('Time to execute query: %.2f secs', toc-tic)
         return result
 
     def create_db_table_from_query(self, name, query):
@@ -120,13 +64,21 @@ class DBengine:
         created = conn.execute(create)
         conn.close()
         toc = time.clock()
-        if self.verbose:
-            exec_time = toc-tic
-            print('Time to create table: %.2f secs' % exec_time)
+        logging.debug('Time to create table: %.2f secs', toc-tic)
         return True
 
     def create_db_index(self, name, table, attr_list):
-        # add qutores around attr 
+        """
+        create_db_index creates a (multi-column) index on the columns/attributes
+        specified in :param attr_list: with the given :param name: on
+        :param table:.
+
+        :param name: (str) name of index
+        :param table: (str) name of table
+        :param attr: (list[str]) list of attributes/columns to create index on
+        """
+        # We need to quote each attribute since Postgres auto-downcases unquoted column references
+
         quoted_attrs = map(lambda attr: '"{}"'.format(attr), attr_list)
         stmt = index_template.substitute(idx_title=name, table=table, attr=','.join(quoted_attrs))
         tic = time.clock()
@@ -134,7 +86,49 @@ class DBengine:
         result = conn.execute(stmt)
         conn.close()
         toc = time.clock()
-        if self.verbose:
-            exec_time = toc-tic
-            print('Time to create index: %.2f secs' % exec_time)
+        logging.debug('Time to create index: %.2f secs', toc-tic)
         return result
+
+def _execute_query(args, conn_args):
+    query_id = args[0]
+    query = args[1]
+    logging.debug("Starting to execute query %s with id %s", query, query_id)
+    tic = time.clock()
+    con = psycopg2.connect(conn_args)
+    cur = con.cursor()
+    cur.execute(query)
+    res = cur.fetchall()
+    # con = engine.connect()
+    # res = con.execute(query).fetchall()
+    con.close()
+    toc = time.clock()
+    logging.debug('Time to execute query with id %d: %.2f secs' % (query_id, (toc - tic)))
+    return res
+
+def _execute_query_w_backup(args, conn_args, timeout):
+    query_id = args[0]
+    query = args[1][0]
+    query_backup = args[1][1]
+    logging.debug("Starting to execute query %s with id %s", query, query_id)
+    tic = time.clock()
+    con = psycopg2.connect(conn_args)
+    cur = con.cursor()
+    cur.execute("SET statement_timeout to %d;"%timeout)
+    try:
+        cur.execute(query)
+        res = cur.fetchall()
+    except psycopg2.extensions.QueryCanceledError as e:
+        logging.debug("Failed to execute query %s with id %s. Timeout reached.", query, query_id)
+        logging.debug("Starting to execute backup query %s with id %s", query_backup, query_id)
+        con.close()
+        con = psycopg2.connect(conn_args)
+        cur = con.cursor()
+        cur.execute(query_backup)
+        res = cur.fetchall()
+        if len(res) == 1:
+            logging.info(res)
+        con.close()
+    toc = time.clock()
+    logging.debug('Time to execute query with id %d: %.2f secs', query_id, toc - tic)
+    return res
+

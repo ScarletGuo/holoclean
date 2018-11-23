@@ -4,14 +4,11 @@ from tqdm import tqdm
 
 from .featurizer import Featurizer
 from dataset import AuxTables
-from dataset.dataset import dictify
 
 
 class OccurAttrFeaturizer(Featurizer):
-    def __init__(self, name='OccuFeaturizer'):
-        super(OccurAttrFeaturizer, self).__init__(name)
-
     def specific_setup(self):
+        self.name = 'OccurFeaturizer'
         if not self.setup_done:
             raise Exception('Featurizer %s is not properly setup.'%self.name)
         self.all_attrs = self.ds.get_attributes()
@@ -26,17 +23,8 @@ class OccurAttrFeaturizer(Featurizer):
         self.raw_data_dict = self.ds.raw_data.df.set_index('_tid_').to_dict('index')
         total, single_stats, pair_stats = self.ds.get_statistics()
         self.total = float(total)
-        self.single_stats = {}
-        for attr in single_stats:
-            self.single_stats[attr] = single_stats[attr].to_dict()
-        self.pair_stats = {}
-        for attr1 in tqdm(pair_stats):
-            self.pair_stats[attr1] = {}
-            for attr2 in pair_stats[attr1]:
-                if attr2 == '_tid_':
-                    continue
-                tmp_df = pair_stats[attr1][attr2]
-                self.pair_stats[attr1][attr2] = dictify(tmp_df)
+        self.single_stats = single_stats
+        self.pair_stats = pair_stats
 
     def create_tensor(self):
         # Iterate over tuples in domain
@@ -68,6 +56,7 @@ class OccurAttrFeaturizer(Featurizer):
                 # Get topK values
                 if val not in self.pair_stats[attr][rv_attr]:
                     if not pd.isnull(tuple[rv_attr]):
+                        logging.error('Cannot find attribute: %s with value %s in pair-wise statistics' % (attr, val))
                         raise Exception('Something is wrong with the pairwise statistics. <Val> should be present in dictionary.')
                 else:
                     all_vals = self.pair_stats[attr][rv_attr][val]
