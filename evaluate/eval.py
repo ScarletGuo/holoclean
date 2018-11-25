@@ -181,11 +181,15 @@ class EvalEngine:
     def compute_f1(self):
         prec = self.compute_precision()
         rec = self.compute_recall()
+        if prec+rec == 0:
+            return 0
         f1 = 2*(prec*rec)/(prec+rec)
         return f1
 
     def compute_repairing_f1(self):
         prec = self.compute_precision()
         rec = self.compute_repairing_recall()
+        if prec+rec == 0:
+            return 0
         f1 = 2*(prec*rec)/(prec+rec)
         return f1
