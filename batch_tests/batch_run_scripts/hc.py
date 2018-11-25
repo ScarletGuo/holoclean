@@ -105,7 +105,8 @@ start = time.time()
 # Init HC Session
 hc = holoclean.HoloClean(pruning_topk=args.k, epochs=30, momentum=0.0, l=0.01, weight_decay=args.w,
                          threads=50, batch_size=1, timeout=3*60000, print_fw=args.wlog, print_eg = args.example,
-                         db_name = "{}_{}".format(args.dataname, args.notes),
+                         db_name="{}_{}".format(args.dataname, args.notes), 
+                         example="../analysis/{}/".format(args.dataname)+"{}_{}_debugging".format(args.dataname, args.notes),
                          normalize=args.normalize, verbose=True, bias=args.bias).session
 # Load Data
 if "adult" in args.dataname.lower():

@@ -146,7 +146,7 @@ class RepairModel:
 
     def get_featurizer_weights(self, feat_info, debuging):
         report = ""
-        log = open("debugging.log","w+")
+        log = open("%s.log"%self.env['example'],"w+")
         for i, f in enumerate(feat_info):
             this_weight = self.model.weight_list[i].data.numpy()[0]
             weight_str = " | ".join(map(str, np.around(this_weight,3)))

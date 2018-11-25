@@ -92,7 +92,13 @@ arguments = [
       'dest': 'batch_size',
       'default': 1,
       'type': int,
-      'help': 'The batch size during training.'})
+      'help': 'The batch size during training.'}),
+    (('-ex', '--example'),
+     {'metavar': 'EXAMPLE',
+      'dest': 'example',
+      'default': 'debugging',
+      'type': str,
+      'help': 'the name of single example output.'})
 ]
 
 # Flags for Holoclean mode
