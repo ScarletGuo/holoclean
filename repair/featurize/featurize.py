@@ -17,9 +17,8 @@ class FeaturizedDataset:
         tensors = [f.create_tensor() for f in featurizers]
         self.featurizer_info = [FeatInfo(featurizers[i].name, t.size()[2], featurizers[i].learnable, featurizers[i].init_weight) for i, t in enumerate(tensors)]
         tensor = torch.cat(tensors,2)
-        # DEBUGING
+        # DEBUGING: individual tensor
         self.debugging = {}
-        print("========== DEBUGGING ==========")
         for i, t in enumerate(tensors):
             debug = t[9324, :, :].numpy()
             feat = featurizers[i].name

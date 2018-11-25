@@ -111,6 +111,11 @@ flags = [
         {'default': False,
          'dest': 'print_fw',
          'action': 'store_true',
+         'help': 'print the weights of featurizers'}),
+    (tuple(['--printeg']),
+        {'default': False,
+         'dest': 'print_eg',
+         'action': 'store_true',
          'help': 'print the weights of featurizers'})
 ]
 

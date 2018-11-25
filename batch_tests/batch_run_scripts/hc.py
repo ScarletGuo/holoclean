@@ -24,6 +24,7 @@ parser.add_argument('-k', type = float, help ='pruning_topk', default=0.1)
 parser.add_argument('-w', type = float, help ='weight decay', default=0.01)
 parser.add_argument('--normalize', help = 'if set true, normalize', action = 'store_true')
 parser.add_argument('--wlog', help = 'if set true, log weight of featurizers', action = 'store_true')
+parser.add_argument('--example', help = 'if set true, log weight for an example, needs to change vid in featurize.py', action = 'store_true')
 parser.add_argument('--bias', help = 'if set true, bias set to true', action = 'store_true')
 parser.add_argument('-msg', type = str, help ='msg appended to result file name', default='')
 parser.add_argument('-notes', type = str, help ='notes appended to dataname, together as db name', default='')
@@ -103,7 +104,7 @@ if args.omit is not None:
 start = time.time()
 # Init HC Session
 hc = holoclean.HoloClean(pruning_topk=args.k, epochs=30, momentum=0.0, l=0.01, weight_decay=args.w,
-                         threads=50, batch_size=1, timeout=3*60000,
+                         threads=50, batch_size=1, timeout=3*60000, print_fw=args.wlog, print_eg = args.example,
                          db_name = "{}_{}".format(args.dataname, args.notes),
                          normalize=args.normalize, verbose=True, bias=args.bias).session
 # Load Data

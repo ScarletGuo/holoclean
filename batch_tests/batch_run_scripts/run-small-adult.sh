@@ -5,15 +5,11 @@ do
 
     echo $location
     echo $name
-    for feat in init lang initsim occurattr constraint initattr freq
-    do
-        #./../../create_db_ubuntu.sh small_adult_1_s${c}
-        ./../../create_db_ubuntu.sh small_adult_1_${c}
-        python hc.py -notes ${c} -dataname small_adult_1 -dcpath $location -dc $name -k 0.1 -w 0.01 -omit $feat occur &> ../log/small_adult/omit-${feat}.log
-        echo $c
-        c=$((c+1))
-        break
-    done
+    #mkdir ../log/small_adult/
+    ./../../create_db_ubuntu.sh small_adult_1_${c}
+    python hc.py -notes ${c} -dataname small_adult_1 -dcpath $location -dc $name -k 0.1 -w 0.01 -omit init lang occur --wlog --example |& tee ../log/small_adult/$c.log
+    echo $c
+    c=$((c+1))
     python send_email.py hc2
     break
 done < ../batch_run_dcs/dc-adult-joint.txt

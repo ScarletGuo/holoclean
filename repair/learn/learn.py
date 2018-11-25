@@ -144,7 +144,7 @@ class RepairModel:
         output = softmax(fx, 1)
         return output
 
-    def get_featurizer_weights(self, feat_info, debugging):
+    def get_featurizer_weights(self, feat_info, debuging):
         report = ""
         log = open("debugging.log","w+")
         for i, f in enumerate(feat_info):
@@ -169,15 +169,15 @@ class RepairModel:
                 'weights': this_weight,
                 'size': feat_size
             }
-            
-            # debugging
-            train = debugging[feat_name]['weights']
-            for dom_idx in range(train.shape[0]):
-                string = "dom_idx [{}],\t,\t,\t\n".format(dom_idx)
-                for i, x in enumerate(train[dom_idx,:]):
-                    if x != 0:
-                        string += "\t, idx [%d], input %.6f, weight %.6f, product %.4f\n" % (
-                            i, x, this_weight[i], this_weight[i]*x)
-                log.write(string)
+            if self.env['print_eg']:
+                # debugging
+                train = debuging[feat_name]['weights']
+                for dom_idx in range(train.shape[0]):
+                    string = "dom_idx [{}],\t,\t,\t\n".format(dom_idx)
+                    for i, x in enumerate(train[dom_idx,:]):
+                        if x != 0:
+                            string += "\t, idx [%d], input %.6f, weight %.6f, product %.4f\n" % (
+                                i, x, this_weight[i], this_weight[i]*x)
+                    log.write(string)
         log.close()
         return report
