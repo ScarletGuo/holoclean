@@ -18,7 +18,7 @@ class FeaturizedDataset:
         self.featurizer_info = [FeatInfo(featurizers[i].name, t.size()[2], featurizers[i].learnable, featurizers[i].init_weight) for i, t in enumerate(tensors)]
         tensor = torch.cat(tensors,2)
         
-        if self.env['print_eg']
+        if self.env['print_eg']:
             # DEBUGING: individual tensor
             self.debugging = {}
             for i, t in enumerate(tensors):
