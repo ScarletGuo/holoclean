@@ -9,4 +9,4 @@ do
     c=$((c+1))
     python send_email.py census
     
-done < ../batch_scripts/dc-census-001.txt
+done < ../batch_run_dcs/dc-census-001.txt
