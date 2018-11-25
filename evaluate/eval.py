@@ -39,7 +39,7 @@ class EvalEngine:
         self.env = env
         self.ds = dataset
 
-     def load_data(self, name, f_path, get_tid, get_attr, get_val, na_values=None):
+    def load_data(self, name, f_path, get_tid, get_attr, get_val, na_values=None):
         tic = time.clock()
         try:
             raw_data = pd.read_csv(f_path, na_values=na_values)
