@@ -39,22 +39,23 @@ class EvalEngine:
         self.env = env
         self.ds = dataset
 
-    def load_data(self, name, fpath, tid_col, attr_col, val_col, na_values=None):
+     def load_data(self, name, f_path, get_tid, get_attr, get_val, na_values=None):
         tic = time.clock()
         try:
-            raw_data = pd.read_csv(fpath, na_values=na_values, encoding='utf-8')
+            raw_data = pd.read_csv(f_path, na_values=na_values)
             raw_data.fillna('_nan_',inplace=True)
-            raw_data.rename({tid_col: '_tid_',
-                attr_col: '_attribute_',
-                val_col: '_value_'}, axis='columns', inplace=True)
+            raw_data['_tid_'] = raw_data.apply(get_tid, axis=1)
+            raw_data['_attribute_'] = raw_data.apply(get_attr, axis=1)
+            raw_data['_value_'] = raw_data.apply(get_val, axis=1)
             raw_data = raw_data[['_tid_', '_attribute_', '_value_']]
-            # Normalize string to whitespaces.
-            raw_data['_value_'] = raw_data['_value_'].str.strip().str.lower()
-            self.clean_data = Table(name, Source.DF, df=raw_data)
+            # Normalize string to lower-case and strip whitespaces.
+            # raw_data['_attribute_'] = raw_data['_attribute_'].apply(lambda x: x.lower())
+            raw_data['_value_'] = raw_data['_value_'].apply(lambda x: x.strip().lower())
+            self.clean_data = Table(name, Source.DF, raw_data)
             self.clean_data.store_to_db(self.ds.engine.engine)
             self.clean_data.create_db_index(self.ds.engine, ['_tid_'])
             self.clean_data.create_db_index(self.ds.engine, ['_attribute_'])
-            status = 'DONE Loading {fname}'.format(fname=os.path.basename(fpath))
+            status = 'DONE Loading '+f_path
         except Exception:
             logging.error('load_data for table %s', name)
             raise
