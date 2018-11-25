@@ -51,11 +51,11 @@ class EvalEngine:
             # Normalize string to lower-case and strip whitespaces.
             # raw_data['_attribute_'] = raw_data['_attribute_'].apply(lambda x: x.lower())
             raw_data['_value_'] = raw_data['_value_'].apply(lambda x: x.strip().lower())
-            self.clean_data = Table(name, Source.DF, raw_data)
+            self.clean_data = Table(name, Source.DF, df=raw_data)
             self.clean_data.store_to_db(self.ds.engine.engine)
             self.clean_data.create_db_index(self.ds.engine, ['_tid_'])
             self.clean_data.create_db_index(self.ds.engine, ['_attribute_'])
-            status = 'DONE Loading '+f_path
+            status = 'DONE Loading {fname}'.format(fname=os.path.basename(fpath))
         except Exception:
             logging.error('load_data for table %s', name)
             raise
