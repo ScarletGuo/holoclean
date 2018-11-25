@@ -63,7 +63,7 @@ def get_value_census(row):
 
 
 def get_attr_adult(row):
-    return row['attr_id'].lower()
+    return row['attr_id']
 
 
 def get_value_adult(row):
@@ -108,14 +108,14 @@ hc = holoclean.HoloClean(pruning_topk=args.k, epochs=30, momentum=0.0, l=0.01, w
                          normalize=args.normalize, verbose=True, bias=args.bias).session
 # Load Data
 if "adult" in args.dataname.lower():
-    hc.load_data(args.dataname, args.datapath, args.data, na_values='?')
-if "census" in args.dataname.lower():
-    hc.load_data(args.dataname, args.datapath, args.data)
+    hc.load_data(args.dataname, os.path.join(args.datapath,args.data), na_values='?')
+elif "census" in args.dataname.lower():
+    hc.load_data(args.dataname, os.path.join(args.datapath,args.data), args.data)
 else:
-    hc.load_data(args.dataname, args.datapath, args.data)
+    hc.load_data(args.dataname, os.path.join(args.datapath,args.data), args.data)
 
 # Load DC
-hc.load_dcs(args.dcpath, args.dc)
+hc.load_dcs(os.path.join(args.dcpath, args.dc))
 hc.ds.set_constraints(hc.get_dcs())
 
 # Error Detection
@@ -129,15 +129,15 @@ featurizer_weights = hc.repair_errors(featurizers)
 
 # Evaluation
 if "hospital" in args.dataname.lower():
-    report = hc.evaluate(args.datapath, args.clean, get_tid1, get_attr_hospital, get_value_hospital)
+    report = hc.evaluate(os.path.join(args.datapath, args.clean), get_tid1, get_attr_hospital, get_value_hospital)
 elif "census" in args.dataname.lower():
-    report = hc.evaluate(args.datapath, args.clean, get_tid, get_attr_census, get_value_census)
+    report = hc.evaluate(os.path.join(args.datapath, args.clean), get_tid, get_attr_census, get_value_census)
 elif "adult" in args.dataname.lower():
-    report = hc.evaluate(args.datapath, args.clean, get_tid, get_attr_adult, get_value_adult, na_values='?')
+    report = hc.evaluate(os.path.join(args.datapath, args.clean), get_tid, get_attr_adult, get_value_adult, na_values='?')
 elif "food" in args.dataname.lower():
-    report = hc.evaluate(args.datapath, args.clean, get_tupleid1, get_attr_hospital, get_value_food)
+    report = hc.evaluate(os.path.join(args.datapath, args.clean), get_tupleid1, get_attr_hospital, get_value_food)
 elif "physician" in args.dataname.lower():
-    report = hc.evaluate(args.datapath, args.clean, get_tupleid, get_attr_hospital, get_value_physician)
+    report = hc.evaluate(os.path.join(args.datapath, args.clean), get_tupleid, get_attr_hospital, get_value_physician)
 else:
     raise Exception("customized function for data is not defined")
 
