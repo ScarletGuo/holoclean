@@ -11,6 +11,7 @@ from repair.featurize import OccurFeaturizer
 from repair.featurize import ConstraintFeat
 from repair.featurize import LangModelFeat
 from repair.featurize import OccurAttrFeaturizer
+from repair.featurize import EmbeddingFeaturizer
 
 parser = argparse.ArgumentParser(description='configurations')
 parser.add_argument('-dataname', type = str, help ='name of the data, no appendix', required = True)
@@ -95,7 +96,8 @@ all_featurizer = {'init': InitFeaturizer(),
                   'occur': OccurFeaturizer(),
                   'lang':LangModelFeat(),
                   'initsim':InitSimFeaturizer(),
-                  'occurattr': OccurAttrFeaturizer()}
+                  'occurattr': OccurAttrFeaturizer(),
+                  'embed': EmbeddingFeaturizer()}
 if args.omit is not None:
     for o in args.omit:
         all_featurizer.pop(o)

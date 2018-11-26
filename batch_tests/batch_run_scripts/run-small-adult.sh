@@ -6,10 +6,10 @@ do
     echo $location
     echo $name
     #mkdir ../log/small_adult/
-    for feat in lang initsim occurattr constraint initattr freq
+    for feat in lang initsim occurattr constraint initattr freq embed
     do
-        ./../../create_db_ubuntu.sh small_adult_1_${c}
-        python hc.py -notes ${c} -dataname small_adult_1 -dcpath $location -dc $name -k 0.1 -w 0.01 -omit init $feat occur --wlog --example |& tee ../log/small_adult/$c.log
+        ./../../create_db_ubuntu.sh small_adult_1_s${c}
+        python hc.py -notes s${c} -dataname small_adult_1 -dcpath $location -dc $name -k 0.1 -w 0.01 -omit init occur $feat --wlog --example |& tee ../log/small_adult/s${c}-${feat}.log
         echo $c
         c=$((c+1))
     done

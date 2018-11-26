@@ -8,6 +8,8 @@ from .constraintfeat import ConstraintFeat
 from .langmodel import LangModelFeat
 from .initattfeat import InitAttFeaturizer
 from .occurattrfeat import OccurAttrFeaturizer
+from .embedfeat import EmbeddingFeaturizer
 
 __all__ = ['FeaturizedDataset', 'Featurizer', 'InitFeaturizer', 'InitSimFeaturizer', 'FreqFeaturizer',
-           'OccurFeaturizer', 'ConstraintFeat', 'LangModelFeat', 'InitAttFeaturizer', 'OccurAttrFeaturizer']
+           'OccurFeaturizer', 'ConstraintFeat', 'LangModelFeat', 'InitAttFeaturizer', 'OccurAttrFeaturizer',
+           'EmbeddingFeaturizer']
