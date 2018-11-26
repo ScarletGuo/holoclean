@@ -173,10 +173,10 @@ class RepairModel:
                 # debugging
                 train = debuging[feat_name]['weights']
                 for dom_idx in range(train.shape[0]):
-                    string = "dom_idx [{}],\t,\t,\t\n".format(dom_idx)
+                    string = "feat {},dom_idx [{}],\t,\t,\t,\t\n".format(feat_name, dom_idx)
                     for i, x in enumerate(train[dom_idx,:]):
                         if x != 0:
-                            string += "\t, idx [%d], input %.6f, weight %.6f, product %.4f\n" % (
+                            string += "\t,\t, idx [%d], input %.6f, weight %.6f, product %.4f\n" % (
                                 i, x, this_weight[i], this_weight[i]*x)
                     log.write(string)
         log.close()
