@@ -1,35 +1,117 @@
 feat LangModelFeat,dom_idx [0],	,	,	,	
-	,dom_idx [0], idx [100], input 0.009611, weight -0.000216, product -0.0000
-	,dom_idx [0], idx [101], input 0.004090, weight -0.001147, product -0.0000
-	,dom_idx [0], idx [102], input -0.008157, weight -0.003149, product 0.0000
-	,dom_idx [0], idx [103], input 0.010509, weight 0.001961, product 0.0000
-	,dom_idx [0], idx [104], input 0.004653, weight -0.001182, product -0.0000
-	,dom_idx [0], idx [105], input 0.009535, weight 0.001977, product 0.0000
-	,dom_idx [0], idx [106], input 0.004105, weight 0.000658, product 0.0000
-	,dom_idx [0], idx [107], input -0.000846, weight -0.001494, product 0.0000
-	,dom_idx [0], idx [108], input 0.003504, weight -0.001613, product -0.0000
-	,dom_idx [0], idx [109], input 0.002823, weight -0.000472, product -0.0000
+	,dom_idx [0], idx [100], input 0.009611, weight 0.000036, product 0.0000
+	,dom_idx [0], idx [101], input 0.004090, weight -0.001066, product -0.0000
+	,dom_idx [0], idx [102], input -0.008157, weight -0.003601, product 0.0000
+	,dom_idx [0], idx [103], input 0.010509, weight 0.000419, product 0.0000
+	,dom_idx [0], idx [104], input 0.004653, weight 0.000298, product 0.0000
+	,dom_idx [0], idx [105], input 0.009535, weight 0.001565, product 0.0000
+	,dom_idx [0], idx [106], input 0.004105, weight 0.002127, product 0.0000
+	,dom_idx [0], idx [107], input -0.000846, weight -0.002166, product 0.0000
+	,dom_idx [0], idx [108], input 0.003504, weight -0.001494, product -0.0000
+	,dom_idx [0], idx [109], input 0.002823, weight 0.000795, product 0.0000
 feat LangModelFeat,dom_idx [1],	,	,	,	
+	,dom_idx [1], idx [100], input 0.014925, weight 0.000036, product 0.0000
+	,dom_idx [1], idx [101], input 0.000089, weight -0.001066, product -0.0000
+	,dom_idx [1], idx [102], input -0.021061, weight -0.003601, product 0.0001
+	,dom_idx [1], idx [103], input 0.012144, weight 0.000419, product 0.0000
+	,dom_idx [1], idx [104], input 0.004760, weight 0.000298, product 0.0000
+	,dom_idx [1], idx [105], input -0.002856, weight 0.001565, product -0.0000
+	,dom_idx [1], idx [106], input 0.010136, weight 0.002127, product 0.0000
+	,dom_idx [1], idx [107], input -0.003262, weight -0.002166, product 0.0000
+	,dom_idx [1], idx [108], input -0.006141, weight -0.001494, product 0.0000
+	,dom_idx [1], idx [109], input 0.004173, weight 0.000795, product 0.0000
 feat LangModelFeat,dom_idx [2],	,	,	,	
+	,dom_idx [2], idx [100], input 0.003224, weight 0.000036, product 0.0000
+	,dom_idx [2], idx [101], input 0.017948, weight -0.001066, product -0.0000
+	,dom_idx [2], idx [102], input -0.010093, weight -0.003601, product 0.0000
+	,dom_idx [2], idx [103], input -0.005305, weight 0.000419, product -0.0000
+	,dom_idx [2], idx [104], input 0.012617, weight 0.000298, product 0.0000
+	,dom_idx [2], idx [105], input -0.004842, weight 0.001565, product -0.0000
+	,dom_idx [2], idx [106], input 0.001283, weight 0.002127, product 0.0000
+	,dom_idx [2], idx [107], input -0.005777, weight -0.002166, product 0.0000
+	,dom_idx [2], idx [108], input -0.006299, weight -0.001494, product 0.0000
+	,dom_idx [2], idx [109], input 0.004840, weight 0.000795, product 0.0000
 feat LangModelFeat,dom_idx [3],	,	,	,	
+	,dom_idx [3], idx [100], input -0.003802, weight 0.000036, product -0.0000
+	,dom_idx [3], idx [101], input -0.012838, weight -0.001066, product 0.0000
+	,dom_idx [3], idx [102], input -0.009752, weight -0.003601, product 0.0000
+	,dom_idx [3], idx [103], input 0.011417, weight 0.000419, product 0.0000
+	,dom_idx [3], idx [104], input 0.003257, weight 0.000298, product 0.0000
+	,dom_idx [3], idx [105], input 0.011936, weight 0.001565, product 0.0000
+	,dom_idx [3], idx [106], input 0.012421, weight 0.002127, product 0.0000
+	,dom_idx [3], idx [107], input -0.009844, weight -0.002166, product 0.0000
+	,dom_idx [3], idx [108], input -0.003199, weight -0.001494, product 0.0000
+	,dom_idx [3], idx [109], input 0.012752, weight 0.000795, product 0.0000
 feat LangModelFeat,dom_idx [4],	,	,	,	
+	,dom_idx [4], idx [100], input 0.003770, weight 0.000036, product 0.0000
+	,dom_idx [4], idx [101], input 0.009510, weight -0.001066, product -0.0000
+	,dom_idx [4], idx [102], input -0.003943, weight -0.003601, product 0.0000
+	,dom_idx [4], idx [103], input 0.009732, weight 0.000419, product 0.0000
+	,dom_idx [4], idx [104], input 0.000302, weight 0.000298, product 0.0000
+	,dom_idx [4], idx [105], input 0.003184, weight 0.001565, product 0.0000
+	,dom_idx [4], idx [106], input 0.008563, weight 0.002127, product 0.0000
+	,dom_idx [4], idx [107], input -0.000471, weight -0.002166, product 0.0000
+	,dom_idx [4], idx [108], input -0.009841, weight -0.001494, product 0.0000
+	,dom_idx [4], idx [109], input 0.001550, weight 0.000795, product 0.0000
 feat LangModelFeat,dom_idx [5],	,	,	,	
+	,dom_idx [5], idx [100], input 0.001350, weight 0.000036, product 0.0000
+	,dom_idx [5], idx [101], input -0.001452, weight -0.001066, product 0.0000
+	,dom_idx [5], idx [102], input -0.016136, weight -0.003601, product 0.0001
+	,dom_idx [5], idx [103], input 0.005317, weight 0.000419, product 0.0000
+	,dom_idx [5], idx [104], input -0.002231, weight 0.000298, product -0.0000
+	,dom_idx [5], idx [105], input -0.001212, weight 0.001565, product -0.0000
+	,dom_idx [5], idx [106], input -0.000645, weight 0.002127, product -0.0000
+	,dom_idx [5], idx [107], input -0.008735, weight -0.002166, product 0.0000
+	,dom_idx [5], idx [108], input -0.007619, weight -0.001494, product 0.0000
+	,dom_idx [5], idx [109], input -0.005549, weight 0.000795, product -0.0000
 feat OccurFeaturizer,dom_idx [0],	,	,	,	
-	,dom_idx [0], idx [110], input 0.008316, weight 0.204614, product 0.0017
-	,dom_idx [0], idx [111], input 0.005835, weight 0.210010, product 0.0012
-	,dom_idx [0], idx [112], input 0.009934, weight 0.207847, product 0.0021
-	,dom_idx [0], idx [113], input 0.006870, weight 0.210478, product 0.0014
-	,dom_idx [0], idx [114], input 0.009158, weight 0.212009, product 0.0019
-	,dom_idx [0], idx [115], input 0.008595, weight 0.210977, product 0.0018
-	,dom_idx [0], idx [116], input 0.007567, weight 0.210435, product 0.0016
-	,dom_idx [0], idx [117], input 0.013046, weight 0.215188, product 0.0028
-	,dom_idx [0], idx [118], input 0.017021, weight 0.215054, product 0.0037
-	,dom_idx [0], idx [119], input 0.006740, weight 0.209821, product 0.0014
+	,dom_idx [0], idx [110], input 0.008316, weight 0.251424, product 0.0021
+	,dom_idx [0], idx [111], input 0.005835, weight 0.259796, product 0.0015
+	,dom_idx [0], idx [112], input 0.009934, weight 0.256651, product 0.0025
+	,dom_idx [0], idx [113], input 0.006870, weight 0.259756, product 0.0018
+	,dom_idx [0], idx [114], input 0.009158, weight 0.262706, product 0.0024
+	,dom_idx [0], idx [115], input 0.008595, weight 0.268057, product 0.0023
+	,dom_idx [0], idx [116], input 0.007567, weight 0.260675, product 0.0020
+	,dom_idx [0], idx [117], input 0.013046, weight 0.270868, product 0.0035
+	,dom_idx [0], idx [118], input 0.017021, weight 0.275978, product 0.0047
+	,dom_idx [0], idx [119], input 0.006740, weight 0.260189, product 0.0018
 feat OccurFeaturizer,dom_idx [1],	,	,	,	
+	,dom_idx [1], idx [110], input 0.000416, weight 0.251424, product 0.0001
+	,dom_idx [1], idx [113], input 0.000344, weight 0.259756, product 0.0001
+	,dom_idx [1], idx [115], input 0.000430, weight 0.268057, product 0.0001
+	,dom_idx [1], idx [116], input 0.000378, weight 0.260675, product 0.0001
+	,dom_idx [1], idx [117], input 0.000652, weight 0.270868, product 0.0002
+	,dom_idx [1], idx [119], input 0.000355, weight 0.260189, product 0.0001
 feat OccurFeaturizer,dom_idx [2],	,	,	,	
+	,dom_idx [2], idx [110], input 0.000416, weight 0.251424, product 0.0001
+	,dom_idx [2], idx [113], input 0.000344, weight 0.259756, product 0.0001
+	,dom_idx [2], idx [115], input 0.000430, weight 0.268057, product 0.0001
+	,dom_idx [2], idx [116], input 0.000378, weight 0.260675, product 0.0001
+	,dom_idx [2], idx [117], input 0.000652, weight 0.270868, product 0.0002
 feat OccurFeaturizer,dom_idx [3],	,	,	,	
+	,dom_idx [3], idx [110], input 0.000416, weight 0.251424, product 0.0001
+	,dom_idx [3], idx [111], input 0.000449, weight 0.259796, product 0.0001
+	,dom_idx [3], idx [113], input 0.000344, weight 0.259756, product 0.0001
+	,dom_idx [3], idx [115], input 0.000430, weight 0.268057, product 0.0001
+	,dom_idx [3], idx [116], input 0.000378, weight 0.260675, product 0.0001
+	,dom_idx [3], idx [117], input 0.000652, weight 0.270868, product 0.0002
+	,dom_idx [3], idx [119], input 0.000355, weight 0.260189, product 0.0001
 feat OccurFeaturizer,dom_idx [4],	,	,	,	
+	,dom_idx [4], idx [110], input 0.000416, weight 0.251424, product 0.0001
+	,dom_idx [4], idx [111], input 0.000449, weight 0.259796, product 0.0001
+	,dom_idx [4], idx [113], input 0.000344, weight 0.259756, product 0.0001
+	,dom_idx [4], idx [115], input 0.000430, weight 0.268057, product 0.0001
+	,dom_idx [4], idx [116], input 0.000378, weight 0.260675, product 0.0001
+	,dom_idx [4], idx [117], input 0.000652, weight 0.270868, product 0.0002
+	,dom_idx [4], idx [119], input 0.000355, weight 0.260189, product 0.0001
 feat OccurFeaturizer,dom_idx [5],	,	,	,	
+	,dom_idx [5], idx [110], input 0.000416, weight 0.251424, product 0.0001
+	,dom_idx [5], idx [111], input 0.000449, weight 0.259796, product 0.0001
+	,dom_idx [5], idx [113], input 0.000344, weight 0.259756, product 0.0001
+	,dom_idx [5], idx [115], input 0.000430, weight 0.268057, product 0.0001
+	,dom_idx [5], idx [116], input 0.000378, weight 0.260675, product 0.0001
+	,dom_idx [5], idx [117], input 0.000652, weight 0.270868, product 0.0002
+	,dom_idx [5], idx [119], input 0.000355, weight 0.260189, product 0.0001
 feat InitAttFeaturizer,dom_idx [0],	,	,	,	
 	,dom_idx [0], idx [0], input -1.000000, weight 1.000000, product -1.0000
 	,dom_idx [0], idx [1], input -1.000000, weight 1.000000, product -1.0000
@@ -103,23 +185,33 @@ feat InitAttFeaturizer,dom_idx [5],	,	,	,
 	,dom_idx [5], idx [9], input -1.000000, weight 1.000000, product -1.0000
 	,dom_idx [5], idx [10], input -1.000000, weight 1.000000, product -1.0000
 feat InitSimFeaturizer,dom_idx [0],	,	,	,	
-	,dom_idx [0], idx [10], input -1.000000, weight -0.493400, product 0.4934
+	,dom_idx [0], idx [10], input -1.000000, weight -0.910681, product 0.9107
 feat InitSimFeaturizer,dom_idx [1],	,	,	,	
 feat InitSimFeaturizer,dom_idx [2],	,	,	,	
 feat InitSimFeaturizer,dom_idx [3],	,	,	,	
 feat InitSimFeaturizer,dom_idx [4],	,	,	,	
 feat InitSimFeaturizer,dom_idx [5],	,	,	,	
 feat ConstraintFeat,dom_idx [0],	,	,	,	
-	,dom_idx [0], idx [6], input 1.000000, weight -0.092115, product -0.0921
+	,dom_idx [0], idx [6], input 0.406504, weight -0.118980, product -0.0484
 feat ConstraintFeat,dom_idx [1],	,	,	,	
+	,dom_idx [1], idx [6], input 0.408706, weight -0.118980, product -0.0486
 feat ConstraintFeat,dom_idx [2],	,	,	,	
+	,dom_idx [2], idx [6], input 0.408706, weight -0.118980, product -0.0486
 feat ConstraintFeat,dom_idx [3],	,	,	,	
+	,dom_idx [3], idx [6], input 0.408523, weight -0.118980, product -0.0486
 feat ConstraintFeat,dom_idx [4],	,	,	,	
+	,dom_idx [4], idx [6], input 0.408523, weight -0.118980, product -0.0486
 feat ConstraintFeat,dom_idx [5],	,	,	,	
+	,dom_idx [5], idx [6], input 0.408523, weight -0.118980, product -0.0486
 feat FreqFeaturizer,dom_idx [0],	,	,	,	
-	,dom_idx [0], idx [10], input 0.006667, weight 0.209966, product 0.0014
+	,dom_idx [0], idx [10], input 0.006667, weight 0.258777, product 0.0017
 feat FreqFeaturizer,dom_idx [1],	,	,	,	
+	,dom_idx [1], idx [10], input 0.000333, weight 0.258777, product 0.0001
 feat FreqFeaturizer,dom_idx [2],	,	,	,	
+	,dom_idx [2], idx [10], input 0.000333, weight 0.258777, product 0.0001
 feat FreqFeaturizer,dom_idx [3],	,	,	,	
+	,dom_idx [3], idx [10], input 0.000333, weight 0.258777, product 0.0001
 feat FreqFeaturizer,dom_idx [4],	,	,	,	
+	,dom_idx [4], idx [10], input 0.000333, weight 0.258777, product 0.0001
 feat FreqFeaturizer,dom_idx [5],	,	,	,	
+	,dom_idx [5], idx [10], input 0.000333, weight 0.258777, product 0.0001
