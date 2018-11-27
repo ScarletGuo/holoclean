@@ -21,7 +21,7 @@ class FeaturizedDataset:
         if self.env['print_eg']:
             # DEBUGING: individual tensor
             for i, t in enumerate(tensors):
-                debug = t[9324, :, :].numpy()
+                debug = t[2777, :, :].numpy()
                 feat = featurizers[i].name
                 self.debugging[feat] = {}
                 self.debugging[feat]['size'] = debug.shape
