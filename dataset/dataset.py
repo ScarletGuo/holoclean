@@ -39,6 +39,11 @@ class AuxTables(Enum):
     inf_values_idx = 6
     inf_values_dom = 7
 
+class CellStatus(Enum):
+    not_set        = 0
+    weak_label     = 1
+    single_value   = 2
+
 class Dataset:
     """
     This class keeps all dataframes and tables for a HC session
@@ -53,8 +58,14 @@ class Dataset:
         for tab in AuxTables:
             self.aux_table[tab] = None
         # start dbengine
-        self.engine = DBengine(env['db_user'], env['db_pwd'], env['db_name'], env['db_host'], pool_size=env['threads'],
-                               timeout=env['timeout'])
+        self.engine = DBengine(
+            env['db_user'],
+            env['db_pwd'],
+            env['db_name'],
+            env['db_host'],
+            pool_size=env['threads'],
+            timeout=env['timeout']
+        )
         # members to convert (tuple_id, attribute) to cell_id
         self.attr_to_idx = {}
         self.attr_count = 0
