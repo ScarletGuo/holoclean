@@ -90,7 +90,7 @@ def get_value_physician(row):
 # select featurizer used for this experiment
 all_featurizer = {'init': InitFeaturizer(),
                   'freq': FreqFeaturizer(),
-                  'initattr': InitAttFeaturizer(learnable=False),
+                  'initattr': InitAttFeaturizer(),
                   'constraint':ConstraintFeat(),
                   'occur': OccurFeaturizer(),
                   'lang':LangModelFeat(),
