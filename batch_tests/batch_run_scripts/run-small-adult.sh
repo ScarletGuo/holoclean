@@ -1,5 +1,5 @@
 source ../../set_env.sh
-c=1
+c=4
 while IFS='	' read -r data model sub name count dcs max_dim location
 do
 
