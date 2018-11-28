@@ -5,10 +5,11 @@ do
 
     echo $location
     echo $name
-    for feat in init lang initsim occurattr constraint initattr freq
+    mkdir ../log/small_census_01/
+    for feat in lang initsim occurattr constraint initattr freq embed
     do
-        ./../../create_db_ubuntu.sh small_census_01_v${c}
-        python hc.py -notes v${c} -dataname small_census_01 -dcpath $location -dc $name -k 0.1 -w 0.01 -omit $feat occur --wlog &> ../log/small_census/omit-${feat}.log
+        ./../../create_db_ubuntu.sh small_census_01_s${c}
+        python hc.py -notes s${c} -dataname small_census_01 -dcpath $location -dc $name -k 0.1 -w 0.01 -omit init occur $feat --wlog --example |& tee ../log/small_census_01/s${c}-${feat}.log
         echo $c
         c=$((c+1))
     done

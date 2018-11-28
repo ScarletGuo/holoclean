@@ -13,6 +13,6 @@ do
         echo $c
         c=$((c+1))
     done
-    python send_email.py hc3
+    python send_email.py hc2
     break
 done < ../batch_run_dcs/dc-adult-joint.txt

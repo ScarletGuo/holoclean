@@ -176,8 +176,8 @@ class RepairModel:
                     string = "feat {},dom_idx [{}],\t,\t,\t,\t\n".format(feat_name, dom_idx)
                     for i, x in enumerate(train[dom_idx,:]):
                         if x != 0:
-                            string += "\t,\t,idx [%d],input %.6f,weight %.6f,product %.4f\n" % (
-                                i, x, this_weight[i], this_weight[i]*x)
+                            string += "\t,dom_idx [%d],idx [%d],input %.6f,weight %.6f,product %.4f\n" % (
+                                dom_idx, i, x, this_weight[i], this_weight[i]*x)
                     log.write(string)
         log.close()
         return report

@@ -42,7 +42,7 @@ class EmbeddingFeaturizer(Featurizer):
         try:
             vec = self.model[normalize(word)]
         except:
-            logging.warning("{} is out-of-voc".format(word))
+            #logging.warning("{} is out-of-voc".format(word))
             return np.zeros((self.emb_size,))
         return vec
 
